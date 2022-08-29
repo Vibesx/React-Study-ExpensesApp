@@ -10,14 +10,14 @@ import Card from "../UI/Card";
 export default function ExpenseItem(props) {
 	// the useState function returns an array; first element is the managed value and the second is a function that allows us to modifiy the value
 	// the parameter of useState is the default value we want
-	const [title, setTitle] = useState(props.title);
+	//const [title, setTitle] = useState(props.title);
 
 	// a good practice is to name functions used by events with <action>Handler
-	const clickHandler = () => {
-		// the setter function provided by useState is a special function that changes our value AND also triggers a rerender of the component (recalls the ExpenseItem function)
-		setTitle("TestTitle");
-		console.log(title);
-	};
+	// const clickHandler = () => {
+	// 	// the setter function provided by useState is a special function that changes our value AND also triggers a rerender of the component (recalls the ExpenseItem function)
+	// 	setTitle("TestTitle");
+	// 	console.log(title);
+	// };
 
 	return (
 		<Card className="expense-item">
@@ -26,7 +26,6 @@ export default function ExpenseItem(props) {
 				<h2>{title}</h2>
 				<div className="expense-item__price">${props.amount}</div>
 			</div>
-			<button onClick={clickHandler}>Change Title</button>
 		</Card>
 	);
 }
