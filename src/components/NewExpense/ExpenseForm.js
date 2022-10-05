@@ -6,6 +6,7 @@ const ExpenseForm = (props) => {
 	const [enteredTitle, setEnteredTitle] = useState("");
 	const [enteredAmount, setEnteredAmount] = useState("");
 	const [enteredDate, setEnteredDate] = useState("");
+	const [formActive, setFormActive] = useState(false);
 
 	// event is a parameter passed by default to any event (onClick, onChange, etc)
 	const titleChangeHandler = (event) => {
@@ -18,6 +19,10 @@ const ExpenseForm = (props) => {
 
 	const dateChangeHandler = (event) => {
 		setEnteredDate(event.target.value);
+	};
+
+	const cancelHandler = () => {
+		clearForm();
 	};
 
 	const submitHandler = (event) => {
@@ -33,10 +38,29 @@ const ExpenseForm = (props) => {
 
 		props.onSaveExpenseData(expenseData);
 		//console.log(expenseData);
+		clearForm();
+	};
+
+	const addNewExpenseHandler = () => {
+		setFormActive(true);
+	};
+
+	const clearForm = () => {
+		setFormActive(false);
 		setEnteredTitle("");
 		setEnteredAmount("");
 		setEnteredDate("");
 	};
+
+	if (!formActive) {
+		return (
+			<div>
+				<button type="button" onClick={addNewExpenseHandler}>
+					Add New Expense
+				</button>
+			</div>
+		);
+	}
 
 	return (
 		// forms have a default onSubmit event that is triggered on pressing the button of type submit
@@ -50,6 +74,7 @@ const ExpenseForm = (props) => {
 						type="text"
 						value={enteredTitle}
 						onChange={titleChangeHandler}
+						required
 					/>
 				</div>
 			</div>
@@ -62,6 +87,7 @@ const ExpenseForm = (props) => {
 						step="0.01"
 						value={enteredAmount}
 						onChange={amountChangeHandler}
+						required
 					/>
 				</div>
 			</div>
@@ -74,10 +100,14 @@ const ExpenseForm = (props) => {
 						max="2022-12-31"
 						value={enteredDate}
 						onChange={dateChangeHandler}
+						required
 					/>
 				</div>
 			</div>
 			<div className="new-expense__actions">
+				<button type="button" onClick={cancelHandler}>
+					Cancel
+				</button>
 				<button type="submit">Add Expense</button>
 			</div>
 		</form>
