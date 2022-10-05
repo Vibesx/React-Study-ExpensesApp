@@ -32,7 +32,7 @@ const ExpenseForm = (props) => {
 
 		const expenseData = {
 			title: enteredTitle,
-			amount: enteredAmount,
+			amount: +enteredAmount, // bug fix; when adding multiple values, those values are added as strings instead of numbers; adding "+" in front turns strings into numbers
 			date: new Date(enteredDate),
 		};
 
